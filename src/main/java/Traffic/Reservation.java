@@ -84,6 +84,7 @@ public class Reservation {
             return false;
     }
 
+
     public void reset()
     {
         for(int i=0; i<this.parking.number_of_spaces; i++)
@@ -103,7 +104,7 @@ public class Reservation {
 
     protected boolean possibleToReserve(Time oldTime, Time newTime)
     {
-        if(newTime.valueTo() < oldTime.valueFrom() || newTime.valueFrom() > oldTime.valueTo())
+        if(newTime.valueTo() <= oldTime.valueFrom() || newTime.valueFrom() >= oldTime.valueTo())
         {
             return true;
         }
