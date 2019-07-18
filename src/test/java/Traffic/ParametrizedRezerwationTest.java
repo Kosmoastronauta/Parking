@@ -84,6 +84,18 @@ public class ParametrizedRezerwationTest
     }
 
 
+    @Test
+    public void resetTest()
+    {
+        for(int i=0; i<reservation.parking.number_of_spaces; i++)
+        {
+            reservation.reservSpace(i,new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
+            reservation.reset();
+            Assert.assertEquals(reservation.isFree(i),true);
+        }
+    }
+
+
 
     @Parameterized.Parameters
     public static Collection inputData()

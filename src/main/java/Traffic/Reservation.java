@@ -91,7 +91,9 @@ public class Reservation {
         for(int i=0; i<this.parking.number_of_spaces; i++)
         {
             this.spaces[i] = false;
+
         }
+        this.times.clear();
         this.occupied_spaces = 0;
     }
 
