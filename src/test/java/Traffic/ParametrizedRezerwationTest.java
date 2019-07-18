@@ -63,6 +63,28 @@ public class ParametrizedRezerwationTest
         Assert.assertEquals(reservation.isFree(1),true);
     }
 
+    @Test
+    public void isEmptyParkingAvaliableSpace()
+    {
+        //Given Empty Parking
+        //When Every space is free
+        //Then
+        Assert.assertEquals(reservation.avaliable(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),true);
+
+    }
+
+    @Test
+    public void notEmptyParkingAvaliableAnotherEmptySpace()
+    {
+        //Given Empty Parking
+        //When
+        reservation.reservSpace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
+        //Then
+        Assert.assertEquals(reservation.avaliable(2,new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),true);
+    }
+
+
+
     @Parameterized.Parameters
     public static Collection inputData()
     {
