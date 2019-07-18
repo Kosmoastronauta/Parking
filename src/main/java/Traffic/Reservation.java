@@ -71,7 +71,7 @@ public class Reservation {
 
     public boolean isFree(int number_of_space)
     {
-        if(!this.times.isEmpty())
+        if(this.times.isEmpty())
         {
             return true;
         }

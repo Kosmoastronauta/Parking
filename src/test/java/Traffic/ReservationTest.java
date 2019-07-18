@@ -197,6 +197,37 @@ public class ReservationTest {
         Assert.assertEquals(reservation.possibleToReserve(tempTime,tempTime2), false);
     }
 
+    @Test
+    public void wereReservationWithNoReservationBefore()
+    {
+        for(int i=0; i<reservation.parking.number_of_spaces; i++)
+        {
+            Assert.assertEquals(reservation.wereReservations(i),false);
+        }
+    }
+
+    @Test
+    public void wereReservationWWithReservationsBefore()
+    {
+        for(int i = 0; i <reservation.parking.number_of_spaces; i++ )
+        {
+            reservation.reservSpace(i,new Time(15,40,18,15));
+            Assert.assertEquals(reservation.wereReservations(i),true);
+        }
+    }
+
+    @Test
+    public void wereReservationWWithNoReservationsBeforeButNotEmptyParking()
+    {
+        for(int i = 0; i <reservation.parking.number_of_spaces -1; i++ )
+        {
+            reservation.reservSpace(i,new Time(15,40,18,15));
+            Assert.assertEquals(reservation.wereReservations(i+1),false);
+        }
+    }
+
+
+
 
 
 
