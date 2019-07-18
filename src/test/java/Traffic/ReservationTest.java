@@ -226,6 +226,22 @@ public class ReservationTest {
         }
     }
 
+    @Test
+    public void avaliableNotEmptyReservedInPossibletoReserveTime()
+    {
+        reservation.reservSpace(5,new Time(15,30,17,16));
+
+        Assert.assertEquals(reservation.avaliable(5, new Time (17,40,18,40)),true);
+    }
+
+    @Test
+    public void avaliableNotEmptyReservedInImpossibleReserveTime()
+    {
+        reservation.reservSpace(5,new Time(15,30,17,16));
+
+        Assert.assertEquals(reservation.avaliable(5, new Time (17,15,18,40)), false);
+    }
+
 
 
 

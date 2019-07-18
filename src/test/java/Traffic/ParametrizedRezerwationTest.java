@@ -4,6 +4,7 @@ import org.junit.*;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,6 +45,7 @@ public class ParametrizedRezerwationTest
     public void setUp() {
         parking = new Parking(10);
         reservation = new Reservation(parking);
+        reservation = Mockito.spy(reservation);
     }
 
     @Test
@@ -79,6 +81,7 @@ public class ParametrizedRezerwationTest
         //Given Empty Parking
         //When
         reservation.reservSpace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
+
         //Then
         Assert.assertEquals(reservation.avaliable(2,new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),true);
     }
