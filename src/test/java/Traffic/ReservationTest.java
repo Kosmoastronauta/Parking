@@ -10,22 +10,23 @@ public class ReservationTest {
     private static Time tempTime2;
 
     @BeforeClass
-    public static void init() {
+    public static void init() {}
 
-    }
 
     @Before
     public void setUp() {
         parking = new Parking(10,"TempParking");
-       reservation = new Reservation(parking);
-       tempTime = new Time(15,30,17,15);
-       tempTime2 = new Time (16,40,18,50);
+        Parking.idGenerator = 0;
+        reservation = new Reservation(parking);
+        tempTime = new Time(15,30,17,15);
+        tempTime2 = new Time (16,40,18,50);
+       // reservation.resetParking(0);
     }
+
+
 
     @AfterClass
-    public static void releaseeverything() {
-
-    }
+    public static void releaseeverything() {}
 
     @After
     public void clear() {
@@ -36,9 +37,9 @@ public class ReservationTest {
     public void addSpaceTest() {
         //Given
         //When
-        reservation.reservePlace(1,1,tempTime);
+        reservation.reservePlace(0,1,tempTime);
         //Then
-        Assert.assertTrue(reservation.occupiedPlaces == 1);
+        Assert.assertTrue(reservation.occupiedPlaces.get(0) == 1);
     }
 
     @Test
@@ -48,7 +49,7 @@ public class ReservationTest {
         reservation.reservePlace(0,1,tempTime);
         reservation.release(0,1, tempTime);
         //Then
-        Assert.assertEquals(reservation.parkings.get(0).places[1], false);
+        Assert.assertEquals(reservation.places.get(0)[1], false);
     }
 
     @Test
@@ -163,7 +164,7 @@ public class ReservationTest {
         //When
         reservation.reservePlace(0,1, tempTime);
         //Then
-        Assert.assertEquals(reservation.isFreePlace(1), false);
+        Assert.assertEquals(reservation.isFreePlace(0,1), false);
     }
 
     @Test
@@ -172,7 +173,7 @@ public class ReservationTest {
         //When
         reservation.reservePlace(0,1, tempTime);
         //Then
-        Assert.assertEquals(reservation.isFreePlace(1), false);
+        Assert.assertEquals(reservation.isFreePlace(0,1), false);
     }
 
 
@@ -185,7 +186,7 @@ public class ReservationTest {
         reservation.resetParking(0);
 
         for (int i = 0; i < reservation.parkings.get(0).numberOfPlaces; i++) {
-            Assert.assertEquals(reservation.isFreePlace(i), true);
+            Assert.assertEquals(reservation.isFreePlace(0, i), true);
         }
     }
 
@@ -200,7 +201,7 @@ public class ReservationTest {
     {
         for(int i = 0; i<reservation.parkings.get(0).numberOfPlaces; i++)
         {
-            Assert.assertEquals(reservation.isReservation(i),false);
+            Assert.assertEquals(reservation.isReservation(0, i),false);
         }
     }
 
@@ -210,7 +211,7 @@ public class ReservationTest {
         for(int i = 0; i <reservation.parkings.get(0).numberOfPlaces; i++ )
         {
             reservation.reservePlace(0, i,new Time(15,40,18,15));
-            Assert.assertEquals(reservation.isReservation(i),true);
+            Assert.assertEquals(reservation.isReservation(0, i),true);
         }
     }
 
@@ -220,23 +221,30 @@ public class ReservationTest {
         for(int i = 0; i <reservation.parkings.get(0).numberOfPlaces -1; i++ )
         {
             reservation.reservePlace(0, i, new Time(17,15,18,40));
-            Assert.assertEquals(reservation.isReservation(i+1),false);
+            Assert.assertEquals(reservation.isReservation(0,i+1),false);
         }
     }
 
     @Test
-    public void AvaliableNotEmptyReservedInPossibletoReserveTime()
+    public void avaliableNotEmptyReservedInPossibletoReserveTime()
     {
         reservation.reservePlace(0,5,new Time(15,30,17,16));
 
-        Assert.assertEquals(reservation.isAvaliable(5, new Time (17,40,18,40)),true);
+        Assert.assertEquals(reservation.isAvaliable(0,5, new Time (17,40,18,40)),true);
     }
 
     @Test
-    public void AvaliableNotEmptyReservedInImpossibleReserveTime()
+    public void avaliableNotEmptyReservedInImpossibleReserveTime()
     {
         reservation.reservePlace(0,5,new Time(15,30,17,16));
 
-        Assert.assertEquals(reservation.isAvaliable(5, new Time (17,15,18,40)), false);
+        Assert.assertEquals(reservation.isAvaliable(0,5, new Time (17,15,18,40)), false);
     }
+
+    @Test
+    public void reservationOnEmptyParking()
+    {
+        Assert.assertEquals(reservation.reservePlace(0,0,tempTime),1);
+    }
+
 }

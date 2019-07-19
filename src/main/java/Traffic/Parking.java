@@ -8,7 +8,7 @@ public class Parking
     protected int id;
     protected int numberOfPlaces;
     protected int occupiedPlaces;
-    protected boolean[] places;
+   // protected boolean[] places;
     private int priceDayTariff;
     private int priceNightTariff;
 
@@ -16,13 +16,13 @@ public class Parking
 
     public Parking(int numberOfPlaces, String name)
     {
-        idGenerator++;
         this.id = idGenerator;
+        idGenerator++;
         this.name = name;
         this.numberOfPlaces = numberOfPlaces;
         occupiedPlaces = 0;
-        places = new boolean[numberOfPlaces];
-        Arrays.fill(places,false);
+     //   places = new boolean[numberOfPlaces];
+      //  Arrays.fill(places,false);
     }
 
     public Parking(IparkingFree iparkingFree)
@@ -34,15 +34,6 @@ public class Parking
     {
         String out = "Parking Name: Default Name " + "\n"
                 + " Places: " + this.occupiedPlaces + "/" + this.numberOfPlaces;
-
-        for(int i = 0; i <this.numberOfPlaces; i++)
-        {
-            if(this.places[i])
-                System.out.println(i + " [Occupied]");
-
-            else
-                System.out.println(i + " [Free]");
-        }
         return out;
     }
 
@@ -66,6 +57,5 @@ public class Parking
     {
         return this.numberOfPlaces;
     }
-
 
 }

@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
         ExistingEnvironmentMainTest.class,
         ReservationTest.class,
         ReservationAvaliableParametrizedTest.class,
-        ParametrizedRezerwationTest.class,
+        ParametrizedRezervationTest.class,
         TimeTest.class
         })
 public class ParkingTestSuite {}
