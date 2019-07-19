@@ -15,8 +15,8 @@ public class ReservationTest {
 
     @Before
     public void setUp() {
-        parking = new Parking(10,"TempParking");
         Parking.idGenerator = 0;
+        parking = new Parking(10,"TempParking");
         reservation = new Reservation(parking);
         tempTime = new Time(15,30,17,15);
         tempTime2 = new Time (16,40,18,50);

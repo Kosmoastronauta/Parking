@@ -66,7 +66,7 @@ public class Reservation {
             else
                 {
                     if(isAvaliable(parkingId,numberOfPlace, newTime))
-                        return 1;
+                        return 1; // Is avaliable can be reserved
 
                     else
                         return 2; // is not avaliable Time Conflict
