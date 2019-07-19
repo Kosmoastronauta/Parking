@@ -8,21 +8,24 @@ public class Reservation {
 
     private int from;
     private int to;
-    protected Parking parking;
+   // protected Parking parking;
     protected int occupiedPlaces;
-    protected boolean[] places;
+    protected ArrayList<boolean[]> places;
+    
+    ArrayList<Parking> parkings;
     Hashtable<Integer,ArrayList<Time>> times; // in ith index is list of reservation for ith Place
 
     public Reservation(){}
 
     public Reservation(Parking parking)
     {
-        this.parking = parking;
+        this.places = new ArrayList<>();
+        this.places.add(new boolean[parking.getNumberOfPlaces()]);
+        parkings = new ArrayList<>();
+        parkings.add(parking);
         this.occupiedPlaces = 0;
-        this.places = new boolean[parking.numberOfPlaces];
         times = new Hashtable<Integer, ArrayList<Time>>();
     }
-
 
     public int getFrom() {
         return from;
@@ -32,14 +35,9 @@ public class Reservation {
         return to;
     }
 
-    public Parking getParking() {
-        return parking;
-    }
-
-
-    public int reservePlace(int numberOfPlace, Time newTime)
+    public int reservePlace(int parkingId,int numberOfPlace, Time newTime)
     {
-        if(this.parking.inRange(numberOfPlace))  // That Place exist
+        if(this.parkings.get(parkingId).inRange(numberOfPlace))  // That Place exist
         {
             if (!isReservation(numberOfPlace)) // That Place hasn't been reserved yet
             {
@@ -82,11 +80,11 @@ public class Reservation {
     }
 
 
-    public void resetParking()
+    public void resetParking(int numberOfParking)
     {
-        for(int i = 0; i<this.parking.numberOfPlaces; i++)
+        for(int i = 0; i<this.parkings.get(numberOfParking).numberOfPlaces; i++)
         {
-            this.places[i] = false;
+            this.parkings.get(numberOfParking).places[i] = false;
         }
         this.times.clear();
         this.occupiedPlaces = 0;
@@ -153,9 +151,9 @@ public class Reservation {
     }
 
 
-    protected int release(int numberOfPlace, Time timeToRelease)
+    protected int release(int parkingId,int numberOfPlace, Time timeToRelease)
     {
-        if(this.parking.inRange(numberOfPlace))
+        if(this.parkings.get(numberOfPlace).inRange(numberOfPlace))
         {
             if (times.isEmpty() || !times.containsKey(numberOfPlace))
             {

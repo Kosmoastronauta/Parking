@@ -67,7 +67,7 @@ public class Main {
                     if(parking == null) {
                         System.out.println("Numer of spaces: ");
                         spaces = input.nextInt();
-                        parking = new Parking(spaces);
+                        parking = new Parking(spaces, "Temp Name");
                         reservation = new Reservation(parking);
                         System.out.println("Parking with has been created :) Press any key to continue");
                     }
@@ -96,7 +96,7 @@ public class Main {
                        {
                            System.out.println("Sorry something wrong with typed data :(");
                        }
-                         temp = reservation.reservePlace(numberOfSpace, new Time(0,0,0,0));
+                         temp = reservation.reservePlace(0,numberOfSpace, new Time(0,0,0,0));
                        if(temp == 1)
                        {
                            System.out.println("Your space has been reserved :) press any key to continue");
@@ -126,7 +126,7 @@ public class Main {
                         {
                             System.out.println("Something wrong with typed data");
                         }
-                        temp = reservation.release(numberOfSpace, new Time(0,0,0,0));
+                        temp = reservation.release(0, numberOfSpace, new Time(0,0,0,0));
 
                         if (temp == 1) {
                             System.out.println("Realeasing a space is completed :)");

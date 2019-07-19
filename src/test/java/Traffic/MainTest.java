@@ -16,7 +16,7 @@ public class MainTest {
     public void setUp() {
         iparkingFree = Mockito.mock(IparkingFree.class);
         parking = new Parking(iparkingFree);
-        parking = new Parking(10);
+        parking = new Parking(10,"Funny Parking");
         parking = Mockito.spy(parking);
     }
 

@@ -13,8 +13,8 @@ public class ExistingEnvironmentMainTest {
     @Before
     public void setUp()
     {
-        parking1 = new Parking(10);
-        parking2 = new Parking(20);
+        parking1 = new Parking(10,"Funny Parking");
+        parking2 = new Parking(20, "Sad Parking");
     }
 
     @AfterClass

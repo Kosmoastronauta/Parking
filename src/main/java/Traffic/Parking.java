@@ -3,6 +3,9 @@ import java.util.Arrays;
 
 public class Parking
 {
+    protected static int idGenerator = 0;
+    protected String name;
+    protected int id;
     protected int numberOfPlaces;
     protected int occupiedPlaces;
     protected boolean[] places;
@@ -11,8 +14,11 @@ public class Parking
 
     IparkingFree iparkingFree;
 
-    public Parking(int numberOfPlaces)
+    public Parking(int numberOfPlaces, String name)
     {
+        idGenerator++;
+        this.id = idGenerator;
+        this.name = name;
         this.numberOfPlaces = numberOfPlaces;
         occupiedPlaces = 0;
         places = new boolean[numberOfPlaces];
@@ -50,4 +56,16 @@ public class Parking
         else
             return false;
     }
+
+    public int getId()
+    {
+        return this.id;
+    }
+
+    public int getNumberOfPlaces()
+    {
+        return this.numberOfPlaces;
+    }
+
+
 }

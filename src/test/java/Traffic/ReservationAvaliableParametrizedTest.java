@@ -34,15 +34,15 @@ public class ReservationAvaliableParametrizedTest {
 
     @Before
     public void setUp() {
-        parking = new Parking(10);
+        parking = new Parking(10, "Funny Parking");
         reservation = new Reservation(parking);
-        reservation.resetParking();
+        reservation.resetParking(0);
     }
 
     @After
     public void clear()
     {
-        reservation.resetParking();
+        reservation.resetParking(0);
     }
 
     public ReservationAvaliableParametrizedTest(int hourFrom1, int minFrom1, int hourTo1, int minTo1, int hourFrom2, int minFrom2, int hourTo2, int minTo2, boolean currentStatus)
@@ -74,7 +74,7 @@ public class ReservationAvaliableParametrizedTest {
     {
         //Given Empty Parking
         //When
-        reservation.reservePlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
+        reservation.reservePlace(0,1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
         //Then
         Assert.assertEquals(reservation.isAvaliable(1,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),currentStatus);
     }
@@ -84,7 +84,7 @@ public class ReservationAvaliableParametrizedTest {
     {
         //Given Empty Parking
         //When
-        reservation.reservePlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
+        reservation.reservePlace(0,1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
         //Then
         Assert.assertEquals(reservation.isAvaliable(2,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),true);
     }
