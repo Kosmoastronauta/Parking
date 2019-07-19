@@ -5,15 +5,41 @@ import java.util.Scanner;
 
 public class Main {
 
+    /*
+    Parking parking = null;
+    public Reservation reservation = null;
+    public Scanner input = new Scanner(System.in);
+
+    public void readTime()
+    {
+        int timeInput[] = new int[4];
+        System.out.println("Type time of reservation");
+        System.out.println("From");
+        System.out.print("Hour: ");
+        timeInput[0] = input.nextInt();
+        System.out.print("\nMin: ");
+        System.out.println("To: ");
+        timeInput[1] = input.nextInt();
+        System.out.print("Hour: ");
+        timeInput[2] = input.nextInt();
+        System.out.println("\n To: ");
+        timeInput[3] = input.nextInt();
+
+    }
+*/
     public static void main(String[] args)
     {
         Scanner anyKey = new Scanner(System.in);
         int numberOfSpace = 0;
         Parking parking = null;
+        Reservation reservation = null;
         Scanner input = new Scanner(System.in);
+
+
         int choice = 0;
         int spaces = 0;
 
+        Time time;
         while(choice!=5)
         {
             System.out.println("Parking reservation system");
@@ -42,6 +68,7 @@ public class Main {
                         System.out.println("Numer of spaces: ");
                         spaces = input.nextInt();
                         parking = new Parking(spaces);
+                        reservation = new Reservation(parking);
                         System.out.println("Parking with has been created :) Press any key to continue");
                     }
                     else
@@ -54,7 +81,7 @@ public class Main {
                 case 2:
                 {
                     int temp;
-                   if(parking == null)
+                   if(reservation == null)
                    {
                        System.out.println("Parking hasn't been created yet!!! press any key to continue");
                    }
@@ -62,12 +89,14 @@ public class Main {
                    {
                        System.out.println("Number of space to release: ");
                        try {
-                           numberOfSpace = input.nextInt();
+
+
+
                        }catch (Exception e)
                        {
                            System.out.println("Sorry something wrong with typed data :(");
                        }
-                        temp = parking.reservePlace(numberOfSpace);
+                         temp = reservation.reservePlace(numberOfSpace, new Time(0,0,0,0));
                        if(temp == 1)
                        {
                            System.out.println("Your space has been reserved :) press any key to continue");
@@ -97,7 +126,7 @@ public class Main {
                         {
                             System.out.println("Something wrong with typed data");
                         }
-                        temp = parking.release(numberOfSpace);
+                        temp = reservation.release(numberOfSpace, new Time(0,0,0,0));
 
                         if (temp == 1) {
                             System.out.println("Realeasing a space is completed :)");

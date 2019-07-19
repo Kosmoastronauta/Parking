@@ -9,7 +9,6 @@ import org.junit.runners.Suite;
         ReservationTest.class,
         ReservationAvaliableParametrizedTest.class,
         ParametrizedRezerwationTest.class,
-        MainTestParametric.class,
         TimeTest.class
         })
 public class ParkingTestSuite {}
