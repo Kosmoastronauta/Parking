@@ -67,7 +67,7 @@ public class Main {
                        {
                            System.out.println("Sorry something wrong with typed data :(");
                        }
-                        temp = parking.reservPlace(numberOfSpace);
+                        temp = parking.reservePlace(numberOfSpace);
                        if(temp == 1)
                        {
                            System.out.println("Your space has been reserved :) press any key to continue");

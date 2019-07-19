@@ -32,7 +32,7 @@ public class MainTest {
     public void addPlaceTest() {
         //Given
         //When
-        parking.reservPlace(1);
+        parking.reservePlace(1);
         //Then
         Assert.assertTrue(parking.occupiedPlaces == 1);
     }
@@ -41,7 +41,7 @@ public class MainTest {
     public void reservAndRelease() {
         //Given
         //When
-        parking.reservPlace(1);
+        parking.reservePlace(1);
         parking.release(1);
         //Then
         Assert.assertEquals(parking.places[1], false);
@@ -52,19 +52,19 @@ public class MainTest {
         //Given
         //When
      //   Mockito.when(iparkingFree.inRange(6)).thenReturn(true);
-        parking.reservPlace(3);
+        parking.reservePlace(3);
         //Then
-        Assert.assertEquals(parking.reservPlace(3), 2);
+        Assert.assertEquals(parking.reservePlace(3), 2);
     }
 
     @Test
     public void reservNotReservedInRange() {
         //Given
         //When
-        parking.reservPlace(6);
+        parking.reservePlace(6);
        // Mockito.when(iparkingFree.inRange(6)).thenReturn(true);
         //Then
-        Assert.assertEquals(parking.reservPlace(7), 1);
+        Assert.assertEquals(parking.reservePlace(7), 1);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -72,14 +72,14 @@ public class MainTest {
         //Given
         //When
        // Mockito.when(iparkingFree.inRange(6)).thenReturn(false);
-        parking.reservPlace(-4);
+        parking.reservePlace(-4);
     }
 
     @Test
     public void releaseFreeInRange() {
         //Given
         //When
-        parking.reservPlace(6);
+        parking.reservePlace(6);
       //  Mockito.when(parking.inRange(6)).thenReturn(true);
         //Then
         Assert.assertEquals(parking.release(7), 2);
@@ -89,7 +89,7 @@ public class MainTest {
     public void releaseOccupiedInRange() {
         //Given
         //When
-        parking.reservPlace(6);
+        parking.reservePlace(6);
      //   Mockito.when(parking.isFree(6)).thenReturn(false);
 
         //
@@ -101,7 +101,7 @@ public class MainTest {
     public void releaseNotInRangeLow() {
         //Given
         //When
-        parking.reservPlace(6);
+        parking.reservePlace(6);
         //Then
         Assert.assertEquals(parking.release(-6), 0);
     }
@@ -110,7 +110,7 @@ public class MainTest {
     public void releaseNotInRangeHigh() {
         //Given
         //When
-          parking.reservPlace(6);
+          parking.reservePlace(6);
        // Mockito.when(parking.inRange(6)).thenReturn(false);
         //Then
         Assert.assertEquals(parking.release(42), 0);
@@ -118,21 +118,21 @@ public class MainTest {
 
     @Test
     public void doubleReserv() {
-        parking.reservPlace(1);
-        Assert.assertEquals(parking.reservPlace(1), 2);
+        parking.reservePlace(1);
+        Assert.assertEquals(parking.reservePlace(1), 2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void reservNotExistingPlace() {
         Mockito.when(parking.inRange(-123)).thenReturn(false);
-        parking.reservPlace(-123);
+        parking.reservePlace(-123);
     }
 
     @Test
     public void hasReservationChangedStatustrue() {
         //Given
         //When
-        parking.reservPlace(1);
+        parking.reservePlace(1);
 
         //Then
         Assert.assertEquals(parking.isReserved(1), true);
@@ -142,7 +142,7 @@ public class MainTest {
     public void hasReservationChangedStatusfalse() {
         //Given
         //When
-        parking.reservPlace(1);
+        parking.reservePlace(1);
         //Then
         Assert.assertEquals(parking.isReserved(2), false);
     }
@@ -166,7 +166,7 @@ public class MainTest {
     public void isFreeReserved() {
         //Given
         //When
-        parking.reservPlace(1);
+        parking.reservePlace(1);
         //Then
         Assert.assertEquals(parking.isFree(1), false);
     }
@@ -175,7 +175,7 @@ public class MainTest {
     public void isFreeNotReserved() {
         //Given
         //When
-        parking.reservPlace(1);
+        parking.reservePlace(1);
         Mockito.when(iparkingFree.isFree(1)).thenReturn(true);
         //Then
         Assert.assertEquals(parking.isFree(2), true);
@@ -184,7 +184,7 @@ public class MainTest {
     @Test
     public void allfalseAfterReset() {
         for (int i = 0; i < parking.numberOfPlaces; i++) {
-            parking.reservPlace(i);
+            parking.reservePlace(i);
         }
 
         parking.reset();

@@ -32,8 +32,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(1);
-        parking2.reservPlace(1);
+        parking1.reservePlace(1);
+        parking2.reservePlace(1);
         //Then
         Assert.assertTrue(parking1.occupiedPlaces == 1);
         Assert.assertTrue(parking2.occupiedPlaces == 1);
@@ -44,9 +44,9 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(1);
+        parking1.reservePlace(1);
         parking1.release(1);
-        parking2.reservPlace(15);
+        parking2.reservePlace(15);
         parking2.release(15);
         //Then
         Assert.assertEquals(parking1.places[1],false);
@@ -58,11 +58,11 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(3);
-        parking2.reservPlace(1);
+        parking1.reservePlace(3);
+        parking2.reservePlace(1);
         //Then
-        Assert.assertEquals(parking1.reservPlace(3),2);
-        Assert.assertEquals(parking2.reservPlace(1),2);
+        Assert.assertEquals(parking1.reservePlace(3),2);
+        Assert.assertEquals(parking2.reservePlace(1),2);
     }
 
     @Test
@@ -70,11 +70,11 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(6);
-        parking2.reservPlace(14);
+        parking1.reservePlace(6);
+        parking2.reservePlace(14);
         //Then
-        Assert.assertEquals(parking1.reservPlace(7),1);
-        Assert.assertEquals(parking2.reservPlace(2),1);
+        Assert.assertEquals(parking1.reservePlace(7),1);
+        Assert.assertEquals(parking2.reservePlace(2),1);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -82,8 +82,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(-4);
-        parking1.reservPlace(-15);
+        parking1.reservePlace(-4);
+        parking1.reservePlace(-15);
     }
 
     @Test
@@ -91,8 +91,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(6);
-        parking2.reservPlace(4);
+        parking1.reservePlace(6);
+        parking2.reservePlace(4);
         //Then
         Assert.assertEquals(parking1.release(7),2);
         Assert.assertEquals(parking1.release(7),2);
@@ -103,8 +103,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(6);
-        parking2.reservPlace(15);
+        parking1.reservePlace(6);
+        parking2.reservePlace(15);
         //Then
         Assert.assertEquals(parking1.release(6),1);
         Assert.assertEquals(parking2.release(15),1);
@@ -115,8 +115,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(6);
-        parking2.reservPlace(12);
+        parking1.reservePlace(6);
+        parking2.reservePlace(12);
         //Then
         Assert.assertEquals(parking1.release(-6),0);
         Assert.assertEquals(parking2.release(-50),0);
@@ -127,8 +127,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(6);
-        parking2.reservPlace(19);
+        parking1.reservePlace(6);
+        parking2.reservePlace(19);
         //Then
         Assert.assertEquals(parking2.release(42),0);
         Assert.assertEquals(parking2.release(100),0);
@@ -137,17 +137,17 @@ public class ExistingEnvironmentMainTest {
     @Test
     public void doubleReserv()
     {
-        parking1.reservPlace(1);
-        parking2.reservPlace(14);
-        Assert.assertEquals(parking1.reservPlace(1),2);
-        Assert.assertEquals(parking2.reservPlace(14),2);
+        parking1.reservePlace(1);
+        parking2.reservePlace(14);
+        Assert.assertEquals(parking1.reservePlace(1),2);
+        Assert.assertEquals(parking2.reservePlace(14),2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void reservNotExistingPlace()
     {
-        parking1.reservPlace(-123);
-        parking2.reservPlace(-13);
+        parking1.reservePlace(-123);
+        parking2.reservePlace(-13);
     }
 
     @Test
@@ -155,8 +155,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(1);
-        parking2.reservPlace(13);
+        parking1.reservePlace(1);
+        parking2.reservePlace(13);
         //Then
         Assert.assertEquals(parking1.isReserved(1), true);
         Assert.assertEquals(parking2.isReserved(13), true);
@@ -167,8 +167,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(9);
-        parking2.reservPlace(3);
+        parking1.reservePlace(9);
+        parking2.reservePlace(3);
         //Then
         Assert.assertEquals(parking1.isReserved(3), false);
     }
@@ -199,8 +199,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(1);
-        parking2.reservPlace(5);
+        parking1.reservePlace(1);
+        parking2.reservePlace(5);
         //Then
         Assert.assertEquals(parking1.isFree(1),false);
         Assert.assertEquals(parking2.isFree(5),false);
@@ -211,8 +211,8 @@ public class ExistingEnvironmentMainTest {
     {
         //Given
         //When
-        parking1.reservPlace(1);
-        parking2.reservPlace(5);
+        parking1.reservePlace(1);
+        parking2.reservePlace(5);
         //Then
         Assert.assertEquals(parking1.isFree(5),true);
     }
@@ -222,11 +222,11 @@ public class ExistingEnvironmentMainTest {
     {
         for(int i = 0; i<parking1.numberOfPlaces; i++)
         {
-            parking1.reservPlace(i);
+            parking1.reservePlace(i);
         }
         for(int i = 0; i<parking2.numberOfPlaces; i++)
         {
-            parking2.reservPlace(i);
+            parking2.reservePlace(i);
         }
 
         parking1.reset();

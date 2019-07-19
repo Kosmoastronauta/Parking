@@ -40,7 +40,7 @@ public class Parking
         return out;
     }
 
-    public int reservPlace(int number_of_place)
+    public int reservePlace(int number_of_place)
     {
 
         if(this.inRange(number_of_place)) { // Does it exist ?
