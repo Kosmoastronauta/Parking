@@ -34,6 +34,7 @@ public class ReservationAvaliableParametrizedTest {
 
     @Before
     public void setUp() {
+        Parking.idGenerator = 0;
         parking = new Parking(10, "Funny Parking");
         reservation = new Reservation(parking);
         reservation.resetParking(0);
