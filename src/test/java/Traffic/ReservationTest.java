@@ -1,7 +1,6 @@
 package Traffic;
 
 import org.junit.*;
-import org.mockito.Mockito;
 
 public class ReservationTest {
 
@@ -37,16 +36,16 @@ public class ReservationTest {
     public void addSpaceTest() {
         //Given
         //When
-        reservation.reservPlace(1,tempTime);
+        reservation.reservePlace(1,tempTime);
         //Then
-        Assert.assertTrue(reservation.occupied_places == 1);
+        Assert.assertTrue(reservation.occupiedPlaces == 1);
     }
 
     @Test
     public void reservAndRelease() {
         //Given
         //When
-        reservation.reservPlace(1,tempTime);
+        reservation.reservePlace(1,tempTime);
         reservation.release(1, tempTime);
         //Then
         Assert.assertEquals(reservation.places[1], false);
@@ -57,19 +56,19 @@ public class ReservationTest {
         //Given
         //When
         //   Mockito.when(iparkingFree.inRange(6)).thenReturn(true);
-        reservation.reservPlace(3,tempTime);
+        reservation.reservePlace(3,tempTime);
         //Then
-        Assert.assertEquals(reservation.reservPlace(3,tempTime2), 2);
+        Assert.assertEquals(reservation.reservePlace(3,tempTime2), 2);
     }
 
     @Test
     public void reservNotReservedInRange() {
         //Given
         //When
-        reservation.reservPlace(6,tempTime);
+        reservation.reservePlace(6,tempTime);
         // Mockito.when(iparkingFree.inRange(6)).thenReturn(true);
         //Then
-        Assert.assertEquals(reservation.reservPlace(7,tempTime), 1);
+        Assert.assertEquals(reservation.reservePlace(7,tempTime), 1);
     }
 
     @Test
@@ -77,14 +76,14 @@ public class ReservationTest {
         //Given
         //When
         // Mockito.when(iparkingFree.inRange(6)).thenReturn(false);
-        Assert.assertEquals(reservation.reservPlace(-4,tempTime), 0);
+        Assert.assertEquals(reservation.reservePlace(-4,tempTime), 0);
     }
 
     @Test
     public void releaseFreeInRange() {
         //Given
         //When
-        reservation.reservPlace(6,tempTime);
+        reservation.reservePlace(6,tempTime);
         //Then
         Assert.assertEquals(reservation.release(7, tempTime), 2);
     }
@@ -94,7 +93,7 @@ public class ReservationTest {
     {
         //Given
         //When
-        reservation.reservPlace(6,tempTime);
+        reservation.reservePlace(6,tempTime);
         //   Mockito.when(parking.isFree(6)).thenReturn(false);
         //Then
         Assert.assertEquals(reservation.release(6, tempTime), 1);
@@ -105,7 +104,7 @@ public class ReservationTest {
     {
         //Given
         //When
-        reservation.reservPlace(6,tempTime);
+        reservation.reservePlace(6,tempTime);
         //Then
         Assert.assertEquals(reservation.release(-6,tempTime), 0);
     }
@@ -115,7 +114,7 @@ public class ReservationTest {
     {
         //Given
         //When
-        reservation.reservPlace(6, tempTime);
+        reservation.reservePlace(6, tempTime);
         // Mockito.when(parking.inRange(6)).thenReturn(false);
         //Then
         Assert.assertEquals(reservation.release(42, tempTime), 0);
@@ -123,14 +122,14 @@ public class ReservationTest {
 
     @Test
     public void doubleReserv() {
-        reservation.reservPlace(1, tempTime);
-        Assert.assertEquals(reservation.reservPlace(1, tempTime), 2);
+        reservation.reservePlace(1, tempTime);
+        Assert.assertEquals(reservation.reservePlace(1, tempTime), 2);
     }
 
     @Test
     public void reservNotExistingPlace()
     {
-        Assert.assertEquals(reservation.reservPlace(-123, tempTime),0);
+        Assert.assertEquals(reservation.reservePlace(-123, tempTime),0);
     }
 
     @Test
@@ -138,7 +137,7 @@ public class ReservationTest {
     {
         //Given
         //When
-        reservation.reservPlace(1, tempTime);
+        reservation.reservePlace(1, tempTime);
         //Then
         Assert.assertEquals(reservation.isPlacePossibleToReserve(tempTime2, tempTime), false);
     }
@@ -162,7 +161,7 @@ public class ReservationTest {
     public void isFreeReserved() {
         //Given
         //When
-        reservation.reservPlace(1, tempTime);
+        reservation.reservePlace(1, tempTime);
         //Then
         Assert.assertEquals(reservation.isFreePlace(1), false);
     }
@@ -171,7 +170,7 @@ public class ReservationTest {
     public void isFreeNotReserved() {
         //Given
         //When
-        reservation.reservPlace(1, tempTime);
+        reservation.reservePlace(1, tempTime);
         //Then
         Assert.assertEquals(reservation.isFreePlace(1), false);
     }
@@ -179,13 +178,13 @@ public class ReservationTest {
 
     @Test
     public void allfalseAfterReset() {
-        for (int i = 0; i < reservation.parking.number_of_places; i++) {
-            reservation.reservPlace(i, tempTime);
+        for (int i = 0; i < reservation.parking.numberOfPlaces; i++) {
+            reservation.reservePlace(i, tempTime);
         }
 
         reservation.resetParking();
 
-        for (int i = 0; i < reservation.parking.number_of_places; i++) {
+        for (int i = 0; i < reservation.parking.numberOfPlaces; i++) {
             Assert.assertEquals(reservation.isFreePlace(i), true);
         }
     }
@@ -199,7 +198,7 @@ public class ReservationTest {
     @Test
     public void wereReservationWithNoReservationBefore()
     {
-        for(int i=0; i<reservation.parking.number_of_places; i++)
+        for(int i = 0; i<reservation.parking.numberOfPlaces; i++)
         {
             Assert.assertEquals(reservation.isReservation(i),false);
         }
@@ -208,9 +207,9 @@ public class ReservationTest {
     @Test
     public void wereReservationWWithReservationsBefore()
     {
-        for(int i = 0; i <reservation.parking.number_of_places; i++ )
+        for(int i = 0; i <reservation.parking.numberOfPlaces; i++ )
         {
-            reservation.reservPlace(i,new Time(15,40,18,15));
+            reservation.reservePlace(i,new Time(15,40,18,15));
             Assert.assertEquals(reservation.isReservation(i),true);
         }
     }
@@ -218,9 +217,9 @@ public class ReservationTest {
     @Test
     public void wereReservationWWithNoReservationsBeforeButNotEmptyParking()
     {
-        for(int i = 0; i <reservation.parking.number_of_places -1; i++ )
+        for(int i = 0; i <reservation.parking.numberOfPlaces -1; i++ )
         {
-            reservation.reservPlace(i,new Time(15,40,18,15));
+            reservation.reservePlace(i,new Time(15,40,18,15));
             Assert.assertEquals(reservation.isReservation(i+1),false);
         }
     }
@@ -228,7 +227,7 @@ public class ReservationTest {
     @Test
     public void AvaliableNotEmptyReservedInPossibletoReserveTime()
     {
-        reservation.reservPlace(5,new Time(15,30,17,16));
+        reservation.reservePlace(5,new Time(15,30,17,16));
 
         Assert.assertEquals(reservation.isAvaliable(5, new Time (17,40,18,40)),true);
     }
@@ -236,7 +235,7 @@ public class ReservationTest {
     @Test
     public void AvaliableNotEmptyReservedInImpossibleReserveTime()
     {
-        reservation.reservPlace(5,new Time(15,30,17,16));
+        reservation.reservePlace(5,new Time(15,30,17,16));
 
         Assert.assertEquals(reservation.isAvaliable(5, new Time (17,15,18,40)), false);
     }

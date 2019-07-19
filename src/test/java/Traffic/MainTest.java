@@ -1,7 +1,6 @@
 package Traffic;
 
 import org.junit.*;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 
@@ -35,7 +34,7 @@ public class MainTest {
         //When
         parking.reservPlace(1);
         //Then
-        Assert.assertTrue(parking.occupied_places == 1);
+        Assert.assertTrue(parking.occupiedPlaces == 1);
     }
 
     @Test
@@ -184,13 +183,13 @@ public class MainTest {
 
     @Test
     public void allfalseAfterReset() {
-        for (int i = 0; i < parking.number_of_places; i++) {
+        for (int i = 0; i < parking.numberOfPlaces; i++) {
             parking.reservPlace(i);
         }
 
         parking.reset();
 
-        for (int i = 0; i < parking.number_of_places; i++) {
+        for (int i = 0; i < parking.numberOfPlaces; i++) {
             Assert.assertEquals(parking.isFree(i), true);
         }
     }

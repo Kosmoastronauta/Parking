@@ -74,7 +74,7 @@ public class ReservationAvaliableParametrizedTest {
     {
         //Given Empty Parking
         //When
-        reservation.reservPlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
+        reservation.reservePlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
         //Then
         Assert.assertEquals(reservation.isAvaliable(1,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),currentStatus);
     }
@@ -84,7 +84,7 @@ public class ReservationAvaliableParametrizedTest {
     {
         //Given Empty Parking
         //When
-        reservation.reservPlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
+        reservation.reservePlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
         //Then
         Assert.assertEquals(reservation.isAvaliable(2,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),true);
     }

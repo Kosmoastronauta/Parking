@@ -3,19 +3,19 @@ import java.util.Arrays;
 
 public class Parking
 {
-    protected int number_of_places;
-    protected int occupied_places;
+    protected int numberOfPlaces;
+    protected int occupiedPlaces;
     protected boolean[] places;
     private int priceDayTariff;
     private int priceNightTariff;
 
     IparkingFree iparkingFree;
 
-    public Parking(int number_of_places)
+    public Parking(int numberOfPlaces)
     {
-        this.number_of_places = number_of_places;
-        occupied_places = 0;
-        places = new boolean[number_of_places];
+        this.numberOfPlaces = numberOfPlaces;
+        occupiedPlaces = 0;
+        places = new boolean[numberOfPlaces];
         Arrays.fill(places,false);
     }
 
@@ -24,13 +24,12 @@ public class Parking
         this.iparkingFree = iparkingFree;
     }
 
-
     public String toString()
     {
         String out = "Parking Name: Default Name " + "\n"
-                + " places: " + this.occupied_places + "/" + this.number_of_places;
+                + " places: " + this.occupiedPlaces + "/" + this.numberOfPlaces;
 
-        for(int i = 0; i <this.number_of_places; i++)
+        for(int i = 0; i <this.numberOfPlaces; i++)
         {
             if(this.places[i])
                 System.out.println(i + " [Occupied]");
@@ -50,7 +49,7 @@ public class Parking
                 return 2;
             }
             else { // Reserving
-                this.occupied_places += 1;
+                this.occupiedPlaces += 1;
                 this.places[number_of_place] = true;
             }
 
@@ -66,7 +65,7 @@ public class Parking
 
     public boolean inRange(int number_of_place)
     {
-        if(number_of_place < this.number_of_places && number_of_place >= 0)
+        if(number_of_place < this.numberOfPlaces && number_of_place >= 0)
         {
             return true;
         }
@@ -98,7 +97,7 @@ public class Parking
 
             else //Releasing
                 {
-                this.occupied_places -= 1;
+                this.occupiedPlaces -= 1;
                 this.places[number_of_place] = false;
                 return 1;
                 }
@@ -122,16 +121,16 @@ public class Parking
 
     public void reset()
     {
-        for(int i=0; i<this.number_of_places; i++)
+        for(int i = 0; i<this.numberOfPlaces; i++)
         {
             this.places[i] = false;
         }
-        this.occupied_places = 0;
+        this.occupiedPlaces = 0;
     }
 
     public boolean empty()
     {
-        if(this.occupied_places == 0)
+        if(this.occupiedPlaces == 0)
             return true;
         else
             return false;

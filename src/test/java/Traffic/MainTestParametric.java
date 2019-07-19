@@ -3,7 +3,6 @@ package Traffic;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -49,7 +48,7 @@ public class MainTestParametric
         //When
         parking.reservPlace(1);
         //Then
-        Assert.assertTrue(parking.occupied_places == 1);
+        Assert.assertTrue(parking.occupiedPlaces == 1);
     }
 
     @Test
@@ -216,14 +215,14 @@ public class MainTestParametric
     @Test
     public void allFalseAfterReset()
     {
-        for(int i=0; i<parking.number_of_places; i++)
+        for(int i = 0; i<parking.numberOfPlaces; i++)
         {
             parking.reservPlace(i);
         }
 
         parking.reset();
 
-        for(int i=0; i<parking.number_of_places; i++)
+        for(int i = 0; i<parking.numberOfPlaces; i++)
         {
             Assert.assertEquals(parking.isFree(i),true);
         }

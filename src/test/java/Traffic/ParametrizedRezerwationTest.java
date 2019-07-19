@@ -46,7 +46,7 @@ public class ParametrizedRezerwationTest
     @Test
     public void oneHourAndOneminutOneHourReservationSamePlace()
     {
-        Assert.assertEquals(reservation.reservPlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),1);
+        Assert.assertEquals(reservation.reservePlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),1);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ParametrizedRezerwationTest
     {
         //Given
         //When
-        reservation.reservPlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
+        reservation.reservePlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
         reservation.release(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
         //Then
         Assert.assertEquals(reservation.isFreePlace(1),true);
@@ -75,7 +75,7 @@ public class ParametrizedRezerwationTest
     {
         //Given Empty Parking
         //When
-        reservation.reservPlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
+        reservation.reservePlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
 
         //Then
         Assert.assertEquals(reservation.isAvaliable(2,new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),true);
@@ -84,9 +84,9 @@ public class ParametrizedRezerwationTest
     @Test
     public void resetTest()
     {
-        for(int i=0; i<reservation.parking.number_of_places; i++)
+        for(int i = 0; i<reservation.parking.numberOfPlaces; i++)
         {
-            reservation.reservPlace(i,new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
+            reservation.reservePlace(i,new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
             reservation.resetParking();
             Assert.assertEquals(reservation.isFreePlace(i),true);
         }

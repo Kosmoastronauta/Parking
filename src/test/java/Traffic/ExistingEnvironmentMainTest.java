@@ -1,7 +1,6 @@
 package Traffic;
 
 import org.junit.*;
-import org.mockito.Mockito;
 
 public class ExistingEnvironmentMainTest {
 
@@ -36,8 +35,8 @@ public class ExistingEnvironmentMainTest {
         parking1.reservPlace(1);
         parking2.reservPlace(1);
         //Then
-        Assert.assertTrue(parking1.occupied_places == 1);
-        Assert.assertTrue(parking2.occupied_places == 1);
+        Assert.assertTrue(parking1.occupiedPlaces == 1);
+        Assert.assertTrue(parking2.occupiedPlaces == 1);
     }
 
     @Test
@@ -221,11 +220,11 @@ public class ExistingEnvironmentMainTest {
     @Test
     public void allFalseAfterReset()
     {
-        for(int i=0; i<parking1.number_of_places; i++)
+        for(int i = 0; i<parking1.numberOfPlaces; i++)
         {
             parking1.reservPlace(i);
         }
-        for(int i=0; i<parking2.number_of_places; i++)
+        for(int i = 0; i<parking2.numberOfPlaces; i++)
         {
             parking2.reservPlace(i);
         }
@@ -233,12 +232,12 @@ public class ExistingEnvironmentMainTest {
         parking1.reset();
         parking2.reset();
 
-        for(int i=0; i<parking1.number_of_places; i++)
+        for(int i = 0; i<parking1.numberOfPlaces; i++)
         {
             Assert.assertEquals(parking1.isFree(i),true);
         }
 
-        for(int i=0; i<parking2.number_of_places; i++)
+        for(int i = 0; i<parking2.numberOfPlaces; i++)
         {
             Assert.assertEquals(parking2.isFree(i),true);
         }
