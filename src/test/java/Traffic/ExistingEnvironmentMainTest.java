@@ -19,10 +19,7 @@ public class ExistingEnvironmentMainTest {
     }
 
     @AfterClass
-    public static void releaseeverything()
-    {
-
-    }
+    public static void releaseeverything() {}
 
     @After
     public void clear()

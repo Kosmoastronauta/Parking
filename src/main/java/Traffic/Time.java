@@ -11,7 +11,7 @@ public class Time {
 
     public Time(int hourFrom, int minFrom, int hourTo, int minTo) {
 
-        if(periodValidation(hourFrom,minFrom,hourTo,minTo))
+        if(isPeriodValid(hourFrom,minFrom,hourTo,minTo))
         {
             // OK
         }
@@ -39,7 +39,7 @@ public class Time {
 
     public int value(int hour, int min )
     {
-        if(validationHour(hour) && validationMin(min))
+        if(isHourValid(hour) && isMinValid(min))
         {
             return hour * 60 + min;
         }
@@ -48,9 +48,9 @@ public class Time {
             throw new InvalidParameterException("Inproper input");
     }
 
-    protected boolean periodValidation(int hourFrom, int minFrom, int hourTo, int minTo)
+    protected boolean isPeriodValid(int hourFrom, int minFrom, int hourTo, int minTo)
     {
-        if(validationHour(hourFrom) && validationHour(hourTo) && validationMin(minFrom) && validationMin(minTo))
+        if(isHourValid(hourFrom) && isHourValid(hourTo) && isMinValid(minFrom) && isMinValid(minTo))
         {
             if(value(hourFrom,minFrom) <= value(hourTo,minTo))
             {
@@ -63,7 +63,7 @@ public class Time {
             return false;
     }
 
-    protected boolean validationHour(int hour)
+    protected boolean isHourValid(int hour)
     {
         if(hour >=0 && hour <=23)
             return true;
@@ -71,7 +71,7 @@ public class Time {
             return false;
     }
 
-    protected boolean validationMin(int min)
+    protected boolean isMinValid(int min)
     {
         if(min >=0 && min <=59)
             return true;

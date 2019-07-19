@@ -60,12 +60,12 @@ public class ReservationAvaliableParametrizedTest {
     }
 
     @Test
-    public void isEmptyParkingAvaliableSpace()
+    public void isEmptyParkingisAvaliableSpace()
     {
         //Given Empty Parking
         //When Every space is free
         //Then
-        Assert.assertEquals(reservation.avaliable(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1)),true);
+        Assert.assertEquals(reservation.isAvaliable(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1)),true);
 
     }
 
@@ -76,7 +76,7 @@ public class ReservationAvaliableParametrizedTest {
         //When
         reservation.reservPlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
         //Then
-        Assert.assertEquals(reservation.avaliable(1,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),currentStatus);
+        Assert.assertEquals(reservation.isAvaliable(1,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),currentStatus);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ReservationAvaliableParametrizedTest {
         //When
         reservation.reservPlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
         //Then
-        Assert.assertEquals(reservation.avaliable(2,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),true);
+        Assert.assertEquals(reservation.isAvaliable(2,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),true);
     }
 
     @Parameterized.Parameters

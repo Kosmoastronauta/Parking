@@ -43,7 +43,7 @@ public class Reservation {
     {
         if(this.parking.inRange(number_of_Place))  // That Place exist
         {
-            if (!wereReservations(number_of_Place)) // That Place hasn't been reserved yet
+            if (!isReservation(number_of_Place)) // That Place hasn't been reserved yet
             {
                 times.put(number_of_Place, new ArrayList<Time>());
                 times.get(number_of_Place).add(newTime);
@@ -53,7 +53,7 @@ public class Reservation {
             }
             else
                 {
-                    if(avaliable(number_of_Place, newTime))
+                    if(isAvaliable(number_of_Place, newTime))
                         return 1;
 
                     else
@@ -95,14 +95,13 @@ public class Reservation {
     }
 
 
-    public boolean empty()
+    public boolean isEmpty()
     {
         if(this.occupied_places == 0)
             return true;
         else
             return false;
     }
-
 
     protected boolean isPlacePossibleToReserve(Time oldTime, Time newTime)
     {
@@ -116,7 +115,7 @@ public class Reservation {
 
     }
 
-    protected boolean wereReservations(int number_of_Place)
+    protected boolean isReservation(int number_of_Place)
     {
         if (!times.isEmpty() && times.containsKey(number_of_Place)) // That Place hasn't been reserved yet
         {
@@ -127,8 +126,7 @@ public class Reservation {
             return false;
     }
 
-
-    protected boolean avaliable(int number_of_Place, Time newTime)
+    protected boolean isAvaliable(int number_of_Place, Time newTime)
     {
         boolean answer = true;
 
