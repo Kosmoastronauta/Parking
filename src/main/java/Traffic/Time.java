@@ -11,14 +11,14 @@ public class Time {
 
     public Time(int hourFrom, int minFrom, int hourTo, int minTo) {
 
-        if(validation(hourFrom,minFrom,hourTo,minTo))
+        if(periodValidation(hourFrom,minFrom,hourTo,minTo))
         {
             // OK
         }
 
         else
         {
-            throw new InvalidParameterException("Hour or min is not porper value");
+            throw new InvalidParameterException("Hour or min is not proper value");
         }
 
         this.hourFrom = hourFrom;
@@ -48,7 +48,7 @@ public class Time {
             throw new InvalidParameterException("Inproper input");
     }
 
-    protected boolean validation(int hourFrom, int minFrom, int hourTo, int minTo)
+    protected boolean periodValidation(int hourFrom, int minFrom, int hourTo, int minTo)
     {
         if(validationHour(hourFrom) && validationHour(hourTo) && validationMin(minFrom) && validationMin(minTo))
         {
@@ -62,8 +62,6 @@ public class Time {
         else
             return false;
     }
-
-
 
     protected boolean validationHour(int hour)
     {
@@ -98,6 +96,4 @@ public class Time {
         else
             return false;
     }
-
-
 }

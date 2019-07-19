@@ -21,16 +21,12 @@ public class ParametrizedRezerwationTest
     private static int currentHourTo;
     private static int currentMinTo;
 
-    private ParametrizedRezerwationTest()
-    {
-
-    }
+    private ParametrizedRezerwationTest() {}
 
     @After
     public void clear() {
-        reservation.reset();
+        reservation.resetParking();
     }
-
 
     public ParametrizedRezerwationTest(int hourFrom, int minFrom, int hourTo, int minTo)
     {
@@ -40,7 +36,6 @@ public class ParametrizedRezerwationTest
         this.currentMinTo = minTo;
     }
 
-
     @Before
     public void setUp() {
         parking = new Parking(10);
@@ -49,9 +44,9 @@ public class ParametrizedRezerwationTest
     }
 
     @Test
-    public void oneHourAndOneminutOneHourReservationSameSpace()
+    public void oneHourAndOneminutOneHourReservationSamePlace()
     {
-        Assert.assertEquals(reservation.reservSpace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),1);
+        Assert.assertEquals(reservation.reservPlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),1);
     }
 
     @Test
@@ -59,46 +54,43 @@ public class ParametrizedRezerwationTest
     {
         //Given
         //When
-        reservation.reservSpace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
+        reservation.reservPlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
         reservation.release(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
         //Then
-        Assert.assertEquals(reservation.isFree(1),true);
+        Assert.assertEquals(reservation.isFreePlace(1),true);
     }
 
     @Test
-    public void isEmptyParkingAvaliableSpace()
+    public void isEmptyParkingAvaliablePlace()
     {
         //Given Empty Parking
-        //When Every space is free
+        //When Every Place is free
         //Then
         Assert.assertEquals(reservation.avaliable(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),true);
 
     }
 
     @Test
-    public void notEmptyParkingAvaliableAnotherEmptySpace()
+    public void notEmptyParkingAvaliableAnotherEmptyPlace()
     {
         //Given Empty Parking
         //When
-        reservation.reservSpace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
+        reservation.reservPlace(1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
 
         //Then
         Assert.assertEquals(reservation.avaliable(2,new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),true);
     }
 
-
     @Test
     public void resetTest()
     {
-        for(int i=0; i<reservation.parking.number_of_spaces; i++)
+        for(int i=0; i<reservation.parking.number_of_places; i++)
         {
-            reservation.reservSpace(i,new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
-            reservation.reset();
-            Assert.assertEquals(reservation.isFree(i),true);
+            reservation.reservPlace(i,new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
+            reservation.resetParking();
+            Assert.assertEquals(reservation.isFreePlace(i),true);
         }
     }
-
-
 
     @Parameterized.Parameters
     public static Collection inputData()
@@ -127,9 +119,5 @@ public class ParametrizedRezerwationTest
         {20,	0	,21	,59},
         {21,	59,	22,	0},
         {22,	0	,23	,59}});
-
     }
-
 }
-
-

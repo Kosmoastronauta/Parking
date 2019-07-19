@@ -36,14 +36,14 @@ public class ReservationAvaliableParametrizedTest {
     public void setUp() {
         parking = new Parking(10);
         reservation = new Reservation(parking);
-        reservation.reset();
+        reservation.resetParking();
     }
 
     @After
-    public void clear() {
-        reservation.reset();
+    public void clear()
+    {
+        reservation.resetParking();
     }
-
 
     public ReservationAvaliableParametrizedTest(int hourFrom1, int minFrom1, int hourTo1, int minTo1, int hourFrom2, int minFrom2, int hourTo2, int minTo2, boolean currentStatus)
     {
@@ -58,8 +58,6 @@ public class ReservationAvaliableParametrizedTest {
         this.currentStatus = currentStatus;
 
     }
-
-
 
     @Test
     public void isEmptyParkingAvaliableSpace()
@@ -76,7 +74,7 @@ public class ReservationAvaliableParametrizedTest {
     {
         //Given Empty Parking
         //When
-        reservation.reservSpace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
+        reservation.reservPlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
         //Then
         Assert.assertEquals(reservation.avaliable(1,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),currentStatus);
     }
@@ -86,12 +84,10 @@ public class ReservationAvaliableParametrizedTest {
     {
         //Given Empty Parking
         //When
-        reservation.reservSpace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
+        reservation.reservPlace(1, new Time(currentHourFrom1,currentMinFrom1,currentHourTo1,currentMinTo1));
         //Then
         Assert.assertEquals(reservation.avaliable(2,new Time(currentHourFrom2,currentMinFrom2,currentHourTo2,currentMinTo2)),true);
     }
-
-
 
     @Parameterized.Parameters
     public static Collection inputData()
@@ -101,8 +97,5 @@ public class ReservationAvaliableParametrizedTest {
                 {15  ,23	,16	,57	    ,11	,51,    17,	30,	false},
                 {9   ,30	,10	,15	    ,10	,0,	    10,	15,	false},
                 {20  ,15	,21	,30	    ,19	,54,    21,	0,	false}});
-
     }
-
-
 }

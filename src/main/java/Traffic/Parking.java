@@ -3,20 +3,20 @@ import java.util.Arrays;
 
 public class Parking
 {
-    protected int number_of_spaces;
-    protected int occupied_spaces;
-    protected boolean[] spaces;
+    protected int number_of_places;
+    protected int occupied_places;
+    protected boolean[] places;
     private int priceDayTariff;
     private int priceNightTariff;
 
     IparkingFree iparkingFree;
 
-    public Parking(int number_of_spaces)
+    public Parking(int number_of_places)
     {
-        this.number_of_spaces = number_of_spaces;
-        occupied_spaces = 0;
-        spaces = new boolean[number_of_spaces];
-        Arrays.fill(spaces,false);
+        this.number_of_places = number_of_places;
+        occupied_places = 0;
+        places = new boolean[number_of_places];
+        Arrays.fill(places,false);
     }
 
     public Parking(IparkingFree iparkingFree)
@@ -25,15 +25,14 @@ public class Parking
     }
 
 
-
     public String toString()
     {
         String out = "Parking Name: Default Name " + "\n"
-                + " Spaces: " + this.occupied_spaces + "/" + this.number_of_spaces;
+                + " places: " + this.occupied_places + "/" + this.number_of_places;
 
-        for(int i = 0; i <this.number_of_spaces; i++)
+        for(int i = 0; i <this.number_of_places; i++)
         {
-            if(this.spaces[i])
+            if(this.places[i])
                 System.out.println(i + " [Occupied]");
 
             else
@@ -42,17 +41,17 @@ public class Parking
         return out;
     }
 
-    public int reservSpace(int number_of_space)
+    public int reservPlace(int number_of_place)
     {
 
-        if(this.inRange(number_of_space)) { // Does it exist ?
-            if(this.isReserved(number_of_space)) // If it is occupied
+        if(this.inRange(number_of_place)) { // Does it exist ?
+            if(this.isReserved(number_of_place)) // If it is occupied
             {
                 return 2;
             }
             else { // Reserving
-                this.occupied_spaces += 1;
-                this.spaces[number_of_space] = true;
+                this.occupied_places += 1;
+                this.places[number_of_place] = true;
             }
 
 
@@ -60,14 +59,14 @@ public class Parking
         }
         else
         {
-            throw new IllegalArgumentException("Invalid number of space");
+            throw new IllegalArgumentException("Invalid number of place");
             //return 0;
         }
     }
 
-    public boolean inRange(int number_of_space)
+    public boolean inRange(int number_of_place)
     {
-        if(number_of_space < this.number_of_spaces && number_of_space >= 0)
+        if(number_of_place < this.number_of_places && number_of_place >= 0)
         {
             return true;
         }
@@ -77,9 +76,9 @@ public class Parking
     }
 
 
-    public boolean isReserved(int number_of_space)
+    public boolean isReserved(int number_of_place)
     {
-        if(this.spaces[number_of_space])
+        if(this.places[number_of_place])
         {
             return true;
         }
@@ -88,19 +87,19 @@ public class Parking
             return false;
     }
 
-    public int release(int number_of_space)
+    public int release(int number_of_place)
     {
 
-        if (this.inRange(number_of_space)) { // Does exist that space ?
-            if (this.isFree(number_of_space))
+        if (this.inRange(number_of_place)) { // Does exist that place ?
+            if (this.isFree(number_of_place))
             { // Maybe it is already free
                 return 2;
             }
 
             else //Releasing
                 {
-                this.occupied_spaces -= 1;
-                this.spaces[number_of_space] = false;
+                this.occupied_places -= 1;
+                this.places[number_of_place] = false;
                 return 1;
                 }
         }
@@ -110,9 +109,9 @@ public class Parking
         }
     }
 
-    public boolean isFree(int number_of_space)
+    public boolean isFree(int number_of_place)
     {
-        if(this.spaces[number_of_space])
+        if(this.places[number_of_place])
         {
             return false;
         }
@@ -123,16 +122,16 @@ public class Parking
 
     public void reset()
     {
-        for(int i=0; i<this.number_of_spaces; i++)
+        for(int i=0; i<this.number_of_places; i++)
         {
-            this.spaces[i] = false;
+            this.places[i] = false;
         }
-        this.occupied_spaces = 0;
+        this.occupied_places = 0;
     }
 
     public boolean empty()
     {
-        if(this.occupied_spaces == 0)
+        if(this.occupied_places == 0)
             return true;
         else
             return false;

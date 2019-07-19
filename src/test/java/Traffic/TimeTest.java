@@ -61,11 +61,4 @@ public class TimeTest {
         { 15,   2,  17, 40, true},
         { 0,    0,  23, 59, true}});
     }
-
-
-
-
-
-
-
 }

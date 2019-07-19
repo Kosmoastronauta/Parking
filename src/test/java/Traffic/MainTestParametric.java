@@ -9,25 +9,20 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class MainTestParametric {
+public class MainTestParametric
+{
 
     private static Parking parking;
-    private int currentSpace;
+    private int currentPlace;
     private boolean currentRangeStatus;
 
-    private MainTestParametric()
+    private MainTestParametric() {}
+
+    public MainTestParametric(int currentPlace, boolean currentRangeStatus)
     {
-
-    }
-
-
-    public MainTestParametric(int currentSpace, boolean currentRangeStatus)
-    {
-        this.currentSpace = currentSpace;
+        this.currentPlace = currentPlace;
         this.currentRangeStatus = currentRangeStatus;
     }
-
-
 
     @BeforeClass
     public static void setUp()
@@ -48,13 +43,13 @@ public class MainTestParametric {
     }
 
     @Test
-    public  void addSpaceTest()
+    public  void addPlaceTest()
     {
         //Given
         //When
-        parking.reservSpace(1);
+        parking.reservPlace(1);
         //Then
-        Assert.assertTrue(parking.occupied_spaces == 1);
+        Assert.assertTrue(parking.occupied_places == 1);
     }
 
     @Test
@@ -62,10 +57,10 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(1);
+        parking.reservPlace(1);
         parking.release(1);
         //Then
-        Assert.assertEquals(parking.spaces[1],false);
+        Assert.assertEquals(parking.places[1],false);
     }
 
     @Test
@@ -74,9 +69,9 @@ public class MainTestParametric {
         //Given
         //When
        // Mockito.when(iparkingFree.inRange(6)).thenReturn(true);
-        parking.reservSpace(3);
+        parking.reservPlace(3);
         //Then
-        Assert.assertEquals(parking.reservSpace(3),2);
+        Assert.assertEquals(parking.reservPlace(3),2);
     }
 
     @Test
@@ -84,10 +79,10 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(6);
+        parking.reservPlace(6);
       //  Mockito.when(iparkingFree.inRange(6)).thenReturn(true);
         //Then
-        Assert.assertEquals(parking.reservSpace(7),1);
+        Assert.assertEquals(parking.reservPlace(7),1);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -96,7 +91,7 @@ public class MainTestParametric {
         //Given
         //When
        // Mockito.when(iparkingFree.inRange(6)).thenReturn(false);
-        parking.reservSpace(-4);
+        parking.reservPlace(-4);
     }
 
     @Test
@@ -104,7 +99,7 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(6);
+        parking.reservPlace(6);
 //        Mockito.when(parking.inRange(6)).thenReturn(true);
         //Then
         Assert.assertEquals(parking.release(7),2);
@@ -115,7 +110,7 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(6);
+        parking.reservPlace(6);
        // Mockito.when(parking.isFree(6)).thenReturn(false);
 
         //
@@ -128,7 +123,7 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(6);
+        parking.reservPlace(6);
         //Then
         Assert.assertEquals(parking.release(-6),0);
     }
@@ -138,7 +133,7 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(6);
+        parking.reservPlace(6);
 //        Mockito.when(parking.inRange(6)).thenReturn(false);
         //Then
         Assert.assertEquals(parking.release(42),0);
@@ -147,15 +142,15 @@ public class MainTestParametric {
     @Test
     public void doubleReserv()
     {
-        parking.reservSpace(1);
-        Assert.assertEquals(parking.reservSpace(1),2);
+        parking.reservPlace(1);
+        Assert.assertEquals(parking.reservPlace(1),2);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void reservNotExistingSpace()
+    public void reservNotExistingPlace()
     {
         //Mockito.when(parking.inRange(-123)).thenReturn(false);
-        parking.reservSpace(-123);
+        parking.reservPlace(-123);
     }
 
     @Test
@@ -163,7 +158,7 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(1);
+        parking.reservPlace(1);
 
         //Then
         Assert.assertEquals(parking.isReserved(1), true);
@@ -174,25 +169,25 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(1);
+        parking.reservPlace(1);
         //Then
         Assert.assertEquals(parking.isReserved(2), false);
     }
 
     @Test
-    public void outOfRangeSpaceLow()
+    public void outOfRangePlaceLow()
     {
         Assert.assertEquals(parking.inRange(-3), false);
     }
 
     @Test
-    public void outOfRangeSpaceHigh()
+    public void outOfRangePlaceHigh()
     {
         Assert.assertEquals(parking.inRange(20), false);
     }
 
     @Test
-    public void outOfRangeSpaceIn()
+    public void outOfRangePlaceIn()
     {
         Assert.assertEquals(parking.inRange(4),true);
     }
@@ -202,7 +197,7 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(1);
+        parking.reservPlace(1);
         //Then
         Assert.assertEquals(parking.isFree(1),false);
     }
@@ -212,24 +207,23 @@ public class MainTestParametric {
     {
         //Given
         //When
-        parking.reservSpace(1);
+        parking.reservPlace(1);
       //  Mockito.when(iparkingFree.isFree(1)).thenReturn(true);
         //Then
         Assert.assertEquals(parking.isFree(2),true);
     }
 
-
     @Test
     public void allFalseAfterReset()
     {
-        for(int i=0; i<parking.number_of_spaces; i++)
+        for(int i=0; i<parking.number_of_places; i++)
         {
-            parking.reservSpace(i);
+            parking.reservPlace(i);
         }
 
         parking.reset();
 
-        for(int i=0; i<parking.number_of_spaces; i++)
+        for(int i=0; i<parking.number_of_places; i++)
         {
             Assert.assertEquals(parking.isFree(i),true);
         }
@@ -238,7 +232,7 @@ public class MainTestParametric {
     @Test
     public void inRangeSeries()
     {
-        Assert.assertEquals(parking.inRange(currentSpace),currentRangeStatus);
+        Assert.assertEquals(parking.inRange(currentPlace),currentRangeStatus);
     }
 
     @Parameterized.Parameters
@@ -263,8 +257,5 @@ public class MainTestParametric {
                         {14, false},
                         {15, false},
                         {16, false}});
-
-
     }
-
-    }
+}
