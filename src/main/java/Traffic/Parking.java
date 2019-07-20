@@ -58,4 +58,7 @@ public class Parking
         return this.numberOfPlaces;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }

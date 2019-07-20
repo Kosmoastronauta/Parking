@@ -24,20 +24,22 @@ public class ParametrizedRezervationTest
     private ParametrizedRezervationTest() {}
 
     @After
-    public void clear() {
+    public void clear()
+    {
         reservation.resetParking(0);
     }
 
     public ParametrizedRezervationTest(int hourFrom, int minFrom, int hourTo, int minTo)
     {
-        this.currentHourFrom = hourFrom;
-        this.currentMinFrom = minFrom;
-        this.currentHourTo = hourTo;
-        this.currentMinTo = minTo;
+        currentHourFrom = hourFrom;
+        currentMinFrom = minFrom;
+        currentHourTo = hourTo;
+        currentMinTo = minTo;
     }
 
     @Before
-    public void setUp() {
+    public void setUp()
+    {
         Parking.idGenerator = 0;
         parking = new Parking(10, "Funny Parking");
         reservation = new Reservation(parking);
@@ -45,9 +47,9 @@ public class ParametrizedRezervationTest
     }
 
     @Test
-    public void oneHourAndOneminutOneHourReservationSamePlace()
+    public void oneHourAndOneMinuteOneHourReservationSamePlace()
     {
-        Assert.assertEquals(reservation.reservePlace(0,1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),1);
+        Assert.assertEquals(reservation.reservePlace(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo)), 1);
     }
 
     @Test
@@ -55,10 +57,10 @@ public class ParametrizedRezervationTest
     {
         //Given
         //When
-        reservation.reservePlace(0,1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
-        reservation.release(0,1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
+        reservation.reservePlace(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
+        reservation.release(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
         //Then
-        Assert.assertEquals(reservation.isFreePlace(0,1),true);
+        Assert.assertTrue(reservation.isFreePlace(0, 1));
     }
 
     @Test
@@ -67,7 +69,7 @@ public class ParametrizedRezervationTest
         //Given Empty Parking
         //When Every Place is free
         //Then
-        Assert.assertEquals(reservation.isAvaliable(0,1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),true);
+        Assert.assertTrue(reservation.isAvaliable(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo)));
 
     }
 
@@ -76,49 +78,25 @@ public class ParametrizedRezervationTest
     {
         //Given Empty Parking
         //When
-        reservation.reservePlace(0,1, new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo));
-
+        reservation.reservePlace(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
         //Then
-        Assert.assertEquals(reservation.isAvaliable(0,2,new Time(currentHourFrom,currentMinFrom,currentHourTo,currentMinTo)),true);
+        Assert.assertTrue(reservation.isAvaliable(0, 2, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo)));
     }
 
     @Test
     public void resetTest()
     {
-        for(int i = 0; i<reservation.parkings.get(0).numberOfPlaces; i++)
+        for(int i = 0; i < reservation.parkings.get(0).numberOfPlaces; i++)
         {
-            reservation.reservePlace(0,i,new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
+            reservation.reservePlace(0, i, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
             reservation.resetParking(0);
-            Assert.assertEquals(reservation.isFreePlace(0, i),true);
+            Assert.assertTrue(reservation.isFreePlace(0, i));
         }
     }
 
     @Parameterized.Parameters
     public static Collection inputData()
     {
-        return Arrays.asList(new Object[][]
-        {{0	,0,	1,	59},
-        {1	,59,2,	0 },
-        {2	,0,	3,	59},
-        {3	,59,4,	0 },
-        {4	,0,	5,	59},
-        {5	,59	,6,	0 },
-        {6	,0,	7,	59},
-        {7	,59	,8,	0},
-        {8	,0,	9,	59},
-        {9	,59	,10	,0},
-        {10,	0	,11	,59},
-        {11,	59,	12,	0},
-        {12,	0	,13	,59},
-        {13,	59,	14,	0},
-        {14,	0	,15	,59},
-        {15,	59,	16,	0},
-        {16,	0	,17	,59},
-        {17,	59,	18,	0},
-        {18,	0	,19	,59},
-        {19,	59,	20,	0},
-        {20,	0	,21	,59},
-        {21,	59,	22,	0},
-        {22,	0	,23	,59}});
+        return Arrays.asList(new Object[][]{{0, 0, 1, 59}, {1, 59, 2, 0}, {2, 0, 3, 59}, {3, 59, 4, 0}, {4, 0, 5, 59}, {5, 59, 6, 0}, {6, 0, 7, 59}, {7, 59, 8, 0}, {8, 0, 9, 59}, {9, 59, 10, 0}, {10, 0, 11, 59}, {11, 59, 12, 0}, {12, 0, 13, 59}, {13, 59, 14, 0}, {14, 0, 15, 59}, {15, 59, 16, 0}, {16, 0, 17, 59}, {17, 59, 18, 0}, {18, 0, 19, 59}, {19, 59, 20, 0}, {20, 0, 21, 59}, {21, 59, 22, 0}, {22, 0, 23, 59}});
     }
 }

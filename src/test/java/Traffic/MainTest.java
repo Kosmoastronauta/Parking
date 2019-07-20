@@ -4,7 +4,8 @@ import org.junit.*;
 import org.mockito.Mockito;
 
 
-public class MainTest {
+public class MainTest
+{
 
     IparkingFree iparkingFree;
     private static Parking parking;
@@ -13,10 +14,11 @@ public class MainTest {
     public static void init() {}
 
     @Before
-    public void setUp() {
+    public void setUp()
+    {
         iparkingFree = Mockito.mock(IparkingFree.class);
         parking = new Parking(iparkingFree);
-        parking = new Parking(10,"Funny Parking");
+        parking = new Parking(10, "Funny Parking");
         parking = Mockito.spy(parking);
     }
 
@@ -27,18 +29,21 @@ public class MainTest {
     public void clear() {}
 
     @Test
-    public void outOfRangePlaceLow() {
-        Assert.assertEquals(parking.inRange(-3), false);
+    public void outOfRangePlaceLow()
+    {
+        Assert.assertFalse(parking.inRange(-3));
     }
 
     @Test
-    public void outOfRangePlaceHigh() {
-        Assert.assertEquals(parking.inRange(20), false);
+    public void outOfRangePlaceHigh()
+    {
+        Assert.assertFalse(parking.inRange(20));
     }
 
     @Test
-    public void outOfRangePlaceIn() {
-        Assert.assertEquals(parking.inRange(4), true);
+    public void outOfRangePlaceIn()
+    {
+        Assert.assertTrue(parking.inRange(4));
     }
 
 }
