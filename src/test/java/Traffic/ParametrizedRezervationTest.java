@@ -69,7 +69,7 @@ public class ParametrizedRezervationTest
         //Given Empty Parking
         //When Every Place is free
         //Then
-        Assert.assertTrue(reservation.isAvaliable(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo)));
+        Assert.assertTrue(reservation.isAvaliablePlaceInTime(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo)));
 
     }
 
@@ -80,7 +80,7 @@ public class ParametrizedRezervationTest
         //When
         reservation.reservePlace(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo));
         //Then
-        Assert.assertTrue(reservation.isAvaliable(0, 2, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo)));
+        Assert.assertTrue(reservation.isAvaliablePlaceInTime(0, 2, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo)));
     }
 
     @Test

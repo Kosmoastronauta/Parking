@@ -246,15 +246,35 @@ public class ReservationTest
     public void avaliableNotEmptyReservedInPossibleToReserveTime()
     {
         reservation.reservePlace(0, 5, new Time(15, 30, 17, 16));
-        Assert.assertTrue(reservation.isAvaliable(0, 5, new Time(17, 40, 18, 40)));
+        Assert.assertTrue(reservation.isAvaliablePlaceInTime(0, 5, new Time(17, 40, 18, 40)));
     }
 
     @Test
     public void avaliableNotEmptyReservedInImpossibleReserveTime()
     {
         reservation.reservePlace(0, 5, new Time(15, 30, 17, 16));
+        Assert.assertFalse(reservation.isAvaliablePlaceInTime(0, 5, new Time(17, 15, 18, 40)));
+    }
 
-        Assert.assertFalse(reservation.isAvaliable(0, 5, new Time(17, 15, 18, 40)));
+    @Test
+    public void isListOfTimesEmptyAfterReset()
+    {
+        //Given
+        //When
+        reservation.reservePlace(0, 0, tempTime);
+        reservation.resetParking(0);
+        Assert.assertTrue(reservation.times.get(0).isEmpty());
+    }
+
+    @Test
+    public void avaliableReservationSamePlaceSameTime()
+    {
+        //Given Empty Parking
+        //When
+        reservation.reservePlace(0, 1, new Time(1, 10, 12, 15));
+        //Then
+        Assert.assertFalse(reservation.isAvaliablePlaceInTime(0, 1, new Time(1, 10, 12,
+                15)));
     }
 
     @Test
@@ -262,7 +282,6 @@ public class ReservationTest
     {
         Assert.assertEquals(reservation.reservePlace(0, 0, tempTime), 1);
     }
-
 /*
     @Test
     public void reservationTwoParkingTheSamePlaceInTheSameTime() {

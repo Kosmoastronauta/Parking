@@ -63,15 +63,11 @@ public class Reservation
             }
             else
             {
-                if(isAvaliable(parkingId, numberOfPlace, newTime))
-                {
+                if(isAvaliablePlaceInTime(parkingId, numberOfPlace, newTime))
                     return 1; // Is avaliable can be reserved
-                }
 
                 else
-                {
                     return 2; // is not avaliable Time Conflict
-                }
             }
         }
         else
@@ -102,21 +98,10 @@ public class Reservation
         this.occupiedPlaces.put(parkingId, 0);
     }
 
-
-    public boolean isEmpty(int numberOfParking)
-    {
-        if(this.occupiedPlaces.get(numberOfParking) == 0)
-            return true;
-
-        else
-            return false;
-    }
-
     protected boolean isPlacePossibleToReserve(Time oldTime, Time newTime)
     {
         if(newTime.valueTo() <= oldTime.valueFrom() || newTime.valueFrom() >= oldTime.valueTo())
             return true;
-
         else
             return false;
     }
@@ -133,7 +118,7 @@ public class Reservation
         }
     }
 
-    protected boolean isAvaliable(int parkingId, int numberOfPlace, Time newTime)
+    protected boolean isAvaliablePlaceInTime(int parkingId, int numberOfPlace, Time newTime)
     {
         boolean answer = true;
 
@@ -149,7 +134,6 @@ public class Reservation
 
             if(answer)
             {
-                // times.get(numberOfPlace).add(newTime);
                 return true; // Avaliable and has other reservations
             }
             else
@@ -163,7 +147,6 @@ public class Reservation
     {
         if(this.parkings.get(parkingId).inRange(numberOfPlace))
         {
-
             if(times.get(parkingId).isEmpty() || !times.get(parkingId).containsKey(numberOfPlace))
             {
                 return 2; // Parking Place hasn't been reserved yet
