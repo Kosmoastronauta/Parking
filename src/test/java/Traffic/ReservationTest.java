@@ -269,7 +269,6 @@ public class ReservationTest
         Assert.assertTrue(reservation.times.get(0).isEmpty());
     }
 
-
     @Test
     public void avaliableReservationSamePlaceSameTime()
     {
@@ -341,10 +340,10 @@ public class ReservationTest
     {
         //Given
         reservation = new Reservation(parking);
+        //When
         reservation.reservePlace(parking.getId(), 0, tempTime);
         reservation.addParking(parking2);
+        //Then
         Assert.assertEquals(reservation.release(parking2.getId(), 0, tempTime), 2);
-        //When
-
     }
 }

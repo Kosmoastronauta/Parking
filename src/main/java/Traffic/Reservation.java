@@ -147,7 +147,7 @@ public class Reservation
                         this.places.get(parkingId)[numberOfPlace] = false;
                     }
                 }
-                return 1;
+                return 1; // Everything OK
             }
         }
         else
