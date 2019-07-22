@@ -170,7 +170,7 @@ public class Reservation
             tempHashTable.put(0, new ArrayList<>());
             tempHashTable.remove(0);
 
-            times.put(parking.getId(), tempHashTable);
+            times.put(parking.getId(), tempHashTable); // fill times proper initialized data structures
 
             return 1;
         }
