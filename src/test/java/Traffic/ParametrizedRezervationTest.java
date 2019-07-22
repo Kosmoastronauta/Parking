@@ -43,7 +43,7 @@ public class ParametrizedRezervationTest
         Parking.idGenerator = 0;
         parking = new Parking(10, "Funny Parking");
         reservation = new Reservation(parking);
-        reservation = Mockito.spy(reservation);
+      //  reservation = Mockito.spy(reservation);
     }
 
     @Test
@@ -70,7 +70,6 @@ public class ParametrizedRezervationTest
         //When Every Place is free
         //Then
         Assert.assertTrue(reservation.isAvaliablePlaceInTime(0, 1, new Time(currentHourFrom, currentMinFrom, currentHourTo, currentMinTo)));
-
     }
 
     @Test

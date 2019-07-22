@@ -45,7 +45,7 @@ public class TimeTest
     public void ValidationWithException()
     {
         if(hourFrom != hourTo && minFrom != minTo) { tempTime = new Time(hourTo, minTo, hourFrom, minFrom); }
-        else { throw new InvalidParameterException(); }
+        else  throw new InvalidParameterException();
     }
 
     @Parameterized.Parameters

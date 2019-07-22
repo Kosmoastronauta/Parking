@@ -94,7 +94,7 @@ public class ReservationAvaliableParametrizedTest
     @Parameterized.Parameters
     public static Collection inputData()
     {
-        return Arrays.asList(new Object[][]{{1, 10, 12, 15, 12, 16, 13, 45, true},
+        return Arrays.asList(new Object[][]{{1, 10, 12, 15, 12, 15, 13, 45, true},
                 {15, 23, 16, 57, 11, 51, 17, 30, false},
                 {9, 30, 10, 15, 10, 0, 10, 15, false},
                 {20, 15, 21, 30, 19, 54, 21, 0, false},

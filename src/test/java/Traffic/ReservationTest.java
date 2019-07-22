@@ -11,20 +11,20 @@ public class ReservationTest
     private static Time tempTime2;
 
     @BeforeClass
-    public static void init() {}
-
-    @Before
-    public void setUp()
-    {
-        Parking.idGenerator = 0;
+    public static void init() {
         parking = new Parking(10, "TempParking");
         parking2 = new Parking(20, "Sad Parking");
         parking.setId(0);
         parking2.setId(1);
         reservation = new Reservation(parking);
+    }
+
+    @Before
+    public void setUp()
+    {
         tempTime = new Time(15, 30, 17, 15);
         tempTime2 = new Time(16, 40, 18, 50);
-        // reservation.resetParking(0);
+         reservation.resetParking(0);
     }
 
     @AfterClass
@@ -34,6 +34,7 @@ public class ReservationTest
     public void clear()
     {
         reservation.resetParking(0);
+       // reservation.resetParking(1);
     }
 
     @Test
@@ -266,6 +267,7 @@ public class ReservationTest
         Assert.assertTrue(reservation.times.get(0).isEmpty());
     }
 
+
     @Test
     public void avaliableReservationSamePlaceSameTime()
     {
@@ -277,21 +279,48 @@ public class ReservationTest
                 15)));
     }
 
+
+    @Test
+    public void differentParkingSameSpaceSameTimeReservation()
+    {
+        //Given
+        reservation = new Reservation(parking);
+        reservation.reservePlace(0, 1, tempTime);
+        reservation.addParking(parking2);
+        Assert.assertEquals(reservation.reservePlace(parking2.getId(), 1, tempTime),1);
+    }
+
     @Test
     public void reservationOnEmptyParking()
     {
         Assert.assertEquals(reservation.reservePlace(0, 0, tempTime), 1);
     }
-/*
-    @Test
-    public void reservationTwoParkingTheSamePlaceInTheSameTime() {
+
+   @Test
+    public void addParkingNoBefore()
+   {
+       reservation = new Reservation(parking);
+       parking2.setId(1);
+       Assert.assertEquals(reservation.addParking(parking2),1);
+   }
+
+   @Test
+    public void addParkingWasBefore()
+   {
+       reservation = new Reservation(parking);
+       Assert.assertEquals(reservation.addParking(parking),0);
+   }
+
+   @Test
+    public void isAvaliablePlaceOnAnotherParkingSamePlaceSameTimeFirstReserved()
+    {
         //Given
         //When
+        reservation = new Reservation(parking);
+        reservation.reservePlace(parking.getId(), 0, tempTime);
         reservation.addParking(parking2);
-        reservation.reservePlace(0, 0, tempTime);
         //Then
-        Assert.assertEquals(reservation.reservePlace(1, 0, tempTime), 1);
+        Assert.assertTrue(reservation.isAvaliablePlaceInTime(parking2.getId(),0,tempTime));
     }
 
- */
 }
